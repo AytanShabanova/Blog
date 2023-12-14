@@ -1,9 +1,11 @@
 package com.example.blogsystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -17,8 +19,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO )
     Integer id;
-    String name;
-    String surName;
-//    @OneToMany(mappedBy = "user")
-//    List<Blog>blogs;
+    String fullName;
+    LocalDate age;
+    @OneToMany(mappedBy = "user")
+            @JsonIgnore
+    List<Blog>blogs;
 }

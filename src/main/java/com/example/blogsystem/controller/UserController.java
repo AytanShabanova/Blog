@@ -1,22 +1,33 @@
 package com.example.blogsystem.controller;
 
+import com.example.blogsystem.dto.UserDto;
 import com.example.blogsystem.models.User;
-import com.example.blogsystem.service.UserService;
+import com.example.blogsystem.service.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/users")
 public class UserController {
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
     @PostMapping(name = "/saveUser")
     public void saveUser(@RequestBody  User user){
-        userService.userSave(user);
+        userServiceImpl.userSave(user);
     }
     @GetMapping("/getUser")
-    public void getUsers(){
-        userService.getAllUsers();
+    public List<UserDto> getUsers(){
+        return userServiceImpl.getAllUsers();
+    }
+    @DeleteMapping
+    public void deleteUser(@RequestParam Integer id){
+        userServiceImpl.deleteUser(id);
+    }
+    @GetMapping
+    public UserDto getById(Integer id){
+       return userServiceImpl.getById(id);
     }
 
 }
