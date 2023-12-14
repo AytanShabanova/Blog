@@ -2,6 +2,7 @@ package com.example.blogsystem.service;
 
 import com.example.blogsystem.dto.UserDto;
 import com.example.blogsystem.dto.UserDtoImpl;
+import com.example.blogsystem.exception.NotFoundUserException;
 import com.example.blogsystem.models.User;
 import com.example.blogsystem.repo.UserRepository;
 import com.example.blogsystem.service.inter.UserService;
@@ -37,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getById(Integer id) {
-       return userRepository.findUserById(id).stream().map(userDtoImpl).findFirst().get();
+       return userRepository.findUserById(id).stream().map(userDtoImpl).findFirst().orElseThrow(() -> new NotFoundUserException("User tapilmadi"));
     }
 
 }
