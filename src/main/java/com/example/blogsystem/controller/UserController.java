@@ -14,8 +14,8 @@ import java.util.List;
 public class UserController {
     private final UserServiceImpl userServiceImpl;
     @PostMapping(name = "/saveUser")
-    public void saveUser(@RequestBody  User user){
-        userServiceImpl.userSave(user);
+    public void saveUser(@RequestBody  UserDto userDto){
+        userServiceImpl.userSave(userDto);
     }
     @GetMapping("/getUser")
     public List<UserDto> getUsers(){

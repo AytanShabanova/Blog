@@ -21,7 +21,7 @@ public class User {
     Integer id;
     String fullName;
     LocalDate age;
-    @OneToMany(mappedBy = "user")
-            @JsonIgnore
-    List<Blog>blogs;
+//    @OneToMany(mappedBy = "user")
+//            @JsonIgnore
+//    List<Blog>blogs;
 }
