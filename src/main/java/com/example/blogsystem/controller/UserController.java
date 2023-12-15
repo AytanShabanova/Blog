@@ -1,9 +1,12 @@
 package com.example.blogsystem.controller;
 
 import com.example.blogsystem.dto.UserDto;
-import com.example.blogsystem.models.User;
+
 import com.example.blogsystem.service.UserServiceImpl;
 import lombok.AllArgsConstructor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/api/users")
 public class UserController {
+   //Logger logger= LoggerFactory.getLogger(UserController.class);
     private final UserServiceImpl userServiceImpl;
     @PostMapping(name = "/saveUser")
     public void saveUser(@RequestBody  UserDto userDto){
@@ -19,6 +23,7 @@ public class UserController {
     }
     @GetMapping("/getUser")
     public List<UserDto> getUsers(){
+     //   logger.info("getAll users accept");
         return userServiceImpl.getAllUsers();
     }
     @DeleteMapping

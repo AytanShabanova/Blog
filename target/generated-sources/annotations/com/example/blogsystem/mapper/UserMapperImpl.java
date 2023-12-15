@@ -4,12 +4,14 @@ import com.example.blogsystem.dto.UserDto;
 import com.example.blogsystem.models.User;
 import java.time.LocalDate;
 import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-12-14T23:28:05-0800",
-    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 17.0.7 (Oracle Corporation)"
+    date = "2023-12-15T12:19:23-0800",
+    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 20.0.1 (Oracle Corporation)"
 )
+@Component
 public class UserMapperImpl implements UserMapper {
 
     @Override
