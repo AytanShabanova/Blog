@@ -1,7 +1,9 @@
 package com.example.blogsystem.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -9,40 +11,37 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    private final UserDetailsService userDetailsService;
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http)throws  Exception{
-       return http
+
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
-                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .build();
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(HttpMethod.GET)
+                        .permitAll()
+                        .requestMatchers(HttpMethod.POST,"/user/register")
+                        .permitAll()
+                        .anyRequest()
+                        .permitAll())
+                .userDetailsService(userDetailsService)
+                .httpBasic(withDefaults());
 
+        return http.build();
     }
-    @Bean
-    public InMemoryUserDetailsManager userDetailsManager(){
-        UserDetails userDetails1= User.withUsername("aytan")
-               .password(passwordEncoder().encode("aytan"))
-                .roles("ADMIN")
-                .build();
-        UserDetails userDetails2=User.withUsername("su")
-                .password(passwordEncoder().encode("su"))
-                .roles("USER")
-                .build();
-        return new InMemoryUserDetailsManager(userDetails1,userDetails2);
-    }
+
 }

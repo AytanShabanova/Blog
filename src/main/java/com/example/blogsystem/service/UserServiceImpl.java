@@ -1,5 +1,7 @@
 package com.example.blogsystem.service;
 
+import com.example.blogsystem.config.PasswordConfig;
+import com.example.blogsystem.dto.RegisterRequest;
 import com.example.blogsystem.dto.UserDto;
 import com.example.blogsystem.dto.UserPageResponse;
 import com.example.blogsystem.exception.NotFoundUserException;
@@ -10,6 +12,7 @@ import com.example.blogsystem.service.inter.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +25,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     private final UserMapper mapper;
+    private final PasswordEncoder passwordEncoder;
     @Override
     public User userSave(UserDto userDto){
       return   userRepository.save(mapper.toUserEntity(userDto));
@@ -56,6 +60,19 @@ public class UserServiceImpl implements UserService {
                 .stream()
                 .map(mapper::toUserDto)
                 .toList();
+
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findUserByEmail(email).orElseThrow(() -> new NoSuchElementException("user tapilmadi"));
+    }
+
+    @Override
+    public void register(RegisterRequest request) {
+      User user=  mapper.toFromRegisterRequest(request);
+      user.setPassword(passwordEncoder.encode(request.password()));
+        userRepository.save(user);
 
     }
 

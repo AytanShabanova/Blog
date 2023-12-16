@@ -1,6 +1,5 @@
 package com.example.blogsystem.security;
 
-import jakarta.validation.OverridesAttribute;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,10 +10,12 @@ import java.util.List;
 public class MyUserDetails implements UserDetails {
     private final String email;
     private final String password;
+    private final Boolean isActive;
 
-    public MyUserDetails(String email, String password) {
+    public MyUserDetails(String email, String password, Boolean isActive) {
         this.email = email;
         this.password = password;
+        this.isActive = isActive;
     }
 
     @Override
@@ -50,6 +51,6 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return this.isActive;
     }
 }
