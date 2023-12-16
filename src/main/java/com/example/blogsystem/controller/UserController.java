@@ -2,35 +2,38 @@ package com.example.blogsystem.controller;
 
 import com.example.blogsystem.dto.UserDto;
 
+import com.example.blogsystem.dto.UserPageResponse;
 import com.example.blogsystem.service.UserServiceImpl;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/users")
+@Validated
 public class UserController {
    //Logger logger= LoggerFactory.getLogger(UserController.class);
     private final UserServiceImpl userServiceImpl;
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(name = "/saveUser")
-    public void saveUser(@RequestBody  UserDto userDto){
+    public void saveUser(@RequestBody @Valid UserDto userDto){
         userServiceImpl.userSave(userDto);
     }
     @GetMapping("/getUser")
-    public List<UserDto> getUsers(){
-     //   logger.info("getAll users accept");
-        return userServiceImpl.getAllUsers();
+    public UserPageResponse getUsers(@RequestParam(value = "page")int page, @RequestParam(value = "count") int count){
+     //  logger.info("getAll users accept");
+        return userServiceImpl.getAllUsers(page, count);
     }
     @DeleteMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteUser(@RequestParam Integer id){
         userServiceImpl.deleteUser(id);
     }
-    @GetMapping("/getById")
+   @GetMapping("/getById")
     public UserDto getById(Integer id){
        return userServiceImpl.getById(id);
     }

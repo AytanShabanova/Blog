@@ -21,6 +21,9 @@ public class User {
     Integer id;
     String fullName;
     LocalDate age;
+    String email;
+    String password;
+    Boolean isActive;
 //    @OneToMany(mappedBy = "user")
 //            @JsonIgnore
 //    List<Blog>blogs;

@@ -16,7 +16,7 @@ public class SpringDocumentConfig {
                 .version("0.0.1").description("bu service Blog sayti ucun yazilmisdir")
                 .contact(new Contact()
                         .url("www.google.com")
-                        .email("shabanovaaytan@gmail.com")
+                        .email("filankes@gmail.com")
                         .name("Shabanova Aytan")));
     }
 }

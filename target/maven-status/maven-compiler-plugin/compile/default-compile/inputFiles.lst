@@ -1,3 +1,4 @@
+C:\Users\UFAZ\githubproject\Blog\Blog\src\main\java\com\example\blogsystem\config\SecurityConfig.java
 C:\Users\UFAZ\githubproject\Blog\Blog\src\main\java\com\example\blogsystem\exception\NotFoundUserException.java
 C:\Users\UFAZ\githubproject\Blog\Blog\src\main\java\com\example\blogsystem\config\WebConfig.java
 C:\Users\UFAZ\githubproject\Blog\Blog\src\main\java\com\example\blogsystem\exception\CustimazedException.java
@@ -11,6 +12,7 @@ C:\Users\UFAZ\githubproject\Blog\Blog\src\main\java\com\example\blogsystem\model
 C:\Users\UFAZ\githubproject\Blog\Blog\src\main\java\com\example\blogsystem\config\SpringDocumentConfig.java
 C:\Users\UFAZ\githubproject\Blog\Blog\src\main\java\com\example\blogsystem\service\UserServiceImpl.java
 C:\Users\UFAZ\githubproject\Blog\Blog\src\main\java\com\example\blogsystem\controller\UserController.java
+C:\Users\UFAZ\githubproject\Blog\Blog\src\main\java\com\example\blogsystem\dto\UserPageResponse.java
 C:\Users\UFAZ\githubproject\Blog\Blog\src\main\java\com\example\blogsystem\BlogSystemApplication.java
 C:\Users\UFAZ\githubproject\Blog\Blog\src\main\java\com\example\blogsystem\service\inter\UserService.java
 C:\Users\UFAZ\githubproject\Blog\Blog\src\main\java\com\example\blogsystem\dto\UserDtoImpl.java

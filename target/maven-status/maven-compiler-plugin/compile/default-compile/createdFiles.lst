@@ -1,4 +1,5 @@
 com\example\blogsystem\dto\UserDto.class
+com\example\blogsystem\config\SecurityConfig.class
 com\example\blogsystem\exception\NotFoundUserException.class
 com\example\blogsystem\config\SpringDocumentConfig.class
 com\example\blogsystem\controller\UserController.class
@@ -15,6 +16,7 @@ com\example\blogsystem\exception\CustimazedException.class
 com\example\blogsystem\models\User.class
 com\example\blogsystem\service\UserServiceImpl.class
 com\example\blogsystem\exception\ErrorDetails.class
+com\example\blogsystem\dto\UserPageResponse.class
 com\example\blogsystem\service\inter\UserService.class
 com\example\blogsystem\models\Blog$BlogBuilder.class
 com\example\blogsystem\BlogSystemApplication.class

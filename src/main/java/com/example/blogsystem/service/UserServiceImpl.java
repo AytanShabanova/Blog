@@ -1,7 +1,7 @@
 package com.example.blogsystem.service;
 
 import com.example.blogsystem.dto.UserDto;
-import com.example.blogsystem.dto.UserDtoImpl;
+import com.example.blogsystem.dto.UserPageResponse;
 import com.example.blogsystem.exception.NotFoundUserException;
 import com.example.blogsystem.mapper.UserMapper;
 import com.example.blogsystem.models.User;
@@ -29,11 +29,14 @@ public class UserServiceImpl implements UserService {
 
     }
     @Override
-    public List<UserDto>getAllUsers(){
-     return    userRepository.findAll()
-             .stream()
-             .map(mapper::toUserDto)
-             .toList();
+    public UserPageResponse getAllUsers(int page, int count){
+        Page<User> userPage = userRepository.findAll(PageRequest.of(page, count));
+        return   new UserPageResponse(
+                userPage.getContent().stream().map(mapper::toUserDto).toList(),
+                userPage.getTotalElements(),
+                userPage.getTotalPages(),
+                userPage.hasNext()
+        );
     }
     @Override
     public void deleteUser(Integer id){
